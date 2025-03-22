@@ -1,7 +1,7 @@
 import { makeSearch } from "./js/pixabay-api";
 
 const form = document.querySelector('.form');
-const gallery = document.querySelector('.gallery_list');
+const gallery = document.querySelector('.gallery');
 
 form.addEventListener('submit', handleSubmit);
 

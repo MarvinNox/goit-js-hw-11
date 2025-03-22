@@ -2,7 +2,7 @@ import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 
 export function createMarkup(hits) {
-    const gallery = document.querySelector('.gallery_list');
+    const gallery = document.querySelector('.gallery');
 
     const markUp = hits.map(({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) =>
         `<li class="gallery_item">
@@ -35,7 +35,7 @@ export function createMarkup(hits) {
     gall.refresh();
 };
 
-const gall = new SimpleLightbox('.gallery_list a', {
+const gall = new SimpleLightbox('.gallery a', {
     captionsData: "alt",
     captionDelay: 150,
 });

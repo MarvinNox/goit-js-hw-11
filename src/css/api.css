@@ -44,7 +44,7 @@ button[type='submit']:hover {
   background: #6c8cff;
 }
 
-.gallery_list {
+.gallery {
   width: 1128px;
   display: flex;
   flex-wrap: wrap;

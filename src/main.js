@@ -1,19 +1,25 @@
 import { makeSearch } from "./js/pixabay-api";
+import iziToast from "izitoast";
+import "izitoast/dist/css/iziToast.min.css";
 
 const form = document.querySelector('.form');
 const gallery = document.querySelector('.gallery');
+const loader = document.querySelector('.loader');
 
 form.addEventListener('submit', handleSubmit);
 
 function handleSubmit(evt) {
     evt.preventDefault();
-    const search = evt.target.elements['search-text'].value.trim().split(" ").join("+");
-
     if (!evt.target.elements['search-text'].value) {
-        return;
+        return iziToast.error({
+                    title: 'Error',
+                    message: 'Please, enter a valid image name!',
+                    position: 'topRight',
+                });
     }
-    
-    gallery.querySelector('.loader').style.display = 'block';
+    gallery.innerHTML = '';
+    const search = evt.target.elements['search-text'].value.trim().split(" ").join("+");
+    loader.style.display = 'block';
 
     setTimeout(() => {
         makeSearch(search)

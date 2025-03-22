@@ -19,8 +19,7 @@ export async function makeSearch(searchWords) {
                     message: 'Sorry, there are no images matching<br>your search query. Please try again!',
                     position: 'topRight',
                 })
-            }
-            
+            };
             createMarkup(resp.data.hits);
             
         })

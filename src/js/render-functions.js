@@ -3,7 +3,6 @@ import "simplelightbox/dist/simple-lightbox.min.css";
 
 export function createMarkup(hits) {
     const gallery = document.querySelector('.gallery');
-
     const markUp = hits.map(({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) =>
         `<li class="gallery_item">
       <a class="gallery_img_link" href="${largeImageURL}">
@@ -32,10 +31,11 @@ export function createMarkup(hits) {
     `).join("");
 
     gallery.innerHTML = markUp;
-    gall.refresh();
+    modal.refresh();
+    document.querySelector('.loader').style.display = 'none';
 };
 
-const gall = new SimpleLightbox('.gallery a', {
+const modal = new SimpleLightbox('.gallery a', {
     captionsData: "alt",
     captionDelay: 150,
 });

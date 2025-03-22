@@ -12,7 +12,8 @@ function handleSubmit(evt) {
     if (!evt.target.elements['search-text'].value) {
         return;
     }
-    gallery.innerHTML = '<span class="loader"></span>';
+    
+    gallery.querySelector('.loader').style.display = 'block';
 
     setTimeout(() => {
         makeSearch(search)

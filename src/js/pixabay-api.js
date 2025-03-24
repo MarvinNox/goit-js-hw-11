@@ -1,7 +1,7 @@
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 import axios from 'axios';
-import { createMarkup } from './render-functions';
+import { createMarkup, renderGallery } from './render-functions';
 
 export async function makeSearch(searchWords) {
     return axios.get(`https://pixabay.com/api/`, {
@@ -20,8 +20,7 @@ export async function makeSearch(searchWords) {
                     position: 'topRight',
                 })
             };
-            createMarkup(resp.data.hits);
-            
+            renderGallery(createMarkup(resp.data.hits));
         })
         .catch(error =>
             iziToast.error({

@@ -1,9 +1,11 @@
 import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
 
+export const gallery = document.querySelector('.gallery');
+export const loader = document.querySelector('.loader');
+
 export function createMarkup(hits) {
-    const gallery = document.querySelector('.gallery');
-    const markUp = hits.map(({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) =>
+    return hits.map(({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) =>
         `<li class="gallery_item">
       <a class="gallery_img_link" href="${largeImageURL}">
       <img class="gallery_img" src="${webformatURL}" alt="${tags}" width="360" height="200" /></a>
@@ -29,13 +31,27 @@ export function createMarkup(hits) {
       </div>
     </li>
     `).join("");
-
-    gallery.innerHTML = markUp;
-    modal.refresh();
-    document.querySelector('.loader').style.display = 'none';
 };
 
 const modal = new SimpleLightbox('.gallery a', {
     captionsData: "alt",
     captionDelay: 150,
 });
+
+export function clearGallery() {
+  gallery.innerHTML = '';
+};
+
+function hideLoader() {
+  loader.style.display = 'none';
+}
+
+export function showLoader() {
+    loader.style.display = 'block';
+};
+
+export function renderGallery(markUp) {
+  gallery.innerHTML = markUp;
+  modal.refresh();
+  hideLoader();
+};

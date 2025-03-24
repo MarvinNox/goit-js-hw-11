@@ -42,16 +42,12 @@ export function clearGallery() {
   gallery.innerHTML = '';
 };
 
-function hideLoader() {
-  loader.style.display = 'none';
+export function toggleLoader() {
+  loader.classList.toggle("visually-hidden");
 }
-
-export function showLoader() {
-    loader.style.display = 'block';
-};
 
 export function renderGallery(markUp) {
   gallery.innerHTML = markUp;
   modal.refresh();
-  hideLoader();
+  toggleLoader();
 };

@@ -1,5 +1,5 @@
 import { makeSearch } from "./js/pixabay-api";
-import { clearGallery, showLoader } from "./js/render-functions"
+import { clearGallery, toggleLoader } from "./js/render-functions"
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 
@@ -20,7 +20,7 @@ function handleSubmit(evt) {
     }
     
     clearGallery();
-    showLoader();
+    toggleLoader();
     const search = searchInput.value.trim().split(" ").join("+");
     makeSearch(search); 
     form.reset();

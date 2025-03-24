@@ -24,9 +24,9 @@ export async function makeSearch(searchWords) {
         })
         .catch(error =>
             iziToast.error({
-                title: "Error",
+                title: "Oh no!",
                 titleColor: '#fafafb',
-                message: 'Oh no, something gonna wrong!',
+                message: `${error.message}`,
                 position: 'topRight',
                 messageColor: '#fafafb',
                 })

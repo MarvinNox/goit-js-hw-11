@@ -18,12 +18,10 @@ function handleSubmit(evt) {
                     position: 'topRight',
                 });
     }
-
+    
     clearGallery();
     showLoader();
     const search = searchInput.value.trim().split(" ").join("+");
-
     makeSearch(search); 
-
     form.reset();
 };

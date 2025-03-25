@@ -10,18 +10,18 @@ form.addEventListener('submit', handleSubmit);
 function handleSubmit(evt) {
     evt.preventDefault();
     const searchInput = evt.target.elements['search-text'];
+    const search = searchInput.value.trim();
 
-    if (!searchInput.value) {
-        return iziToast.error({
-                    title: 'Error',
-                    message: 'Please, enter a valid image name!',
-                    position: 'topRight',
-                });
+    if (!searchInput.value || !search) {
+        iziToast.error({
+            title: 'Error',
+            message: 'Please, enter a valid image name!',
+            position: 'topRight',
+        })
+        return;
     }
-    
     clearGallery();
     toggleLoader();
-    const search = searchInput.value.trim().split(" ").join("+");
-    makeSearch(search); 
+    makeSearch(search);
     form.reset();
 };

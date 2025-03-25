@@ -5,7 +5,7 @@ export const gallery = document.querySelector('.gallery');
 export const loader = document.querySelector('.loader');
 
 export function createMarkup(hits) {
-  return hits.map(({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) =>
+  const markUp = hits.map(({ webformatURL, largeImageURL, tags, likes, views, comments, downloads }) =>
     `<li class="gallery_item">
       <a class="gallery_img_link" href="${largeImageURL}">
       <img class="gallery_img"
@@ -35,6 +35,9 @@ export function createMarkup(hits) {
       </div>
     </li>
     `).join("");
+
+  gallery.innerHTML = markUp;
+  modal.refresh();
 };
 
 const modal = new SimpleLightbox('.gallery a', {
@@ -49,8 +52,3 @@ export function clearGallery() {
 export function toggleLoader() {
   loader.classList.toggle("visually-hidden");
 }
-
-export function renderGallery(markUp) {
-  gallery.innerHTML = markUp;
-  modal.refresh();
-};

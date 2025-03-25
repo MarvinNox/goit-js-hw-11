@@ -1,11 +1,22 @@
 import { makeSearch } from "./js/pixabay-api";
-import { clearGallery, toggleLoader } from "./js/render-functions"
+import { createMarkup, clearGallery, toggleLoader } from "./js/render-functions"
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
+import iconPath from "./img/Group.svg"
 
 const form = document.querySelector('.form');
 
 form.addEventListener('submit', handleSubmit);
+
+iziToast.settings({
+    messageColor: '#fafafb',
+    titleColor: '#fafafb',
+    backgroundColor: '#ef4040',
+    iconUrl: iconPath,
+    closeOnEscape: true,
+    closeOnClick: true,
+    position: 'topRight',
+});
 
 function handleSubmit(evt) {
     evt.preventDefault();
@@ -16,12 +27,28 @@ function handleSubmit(evt) {
         iziToast.error({
             title: 'Error',
             message: 'Please, enter a valid image name!',
-            position: 'topRight',
         })
         return;
     }
     clearGallery();
     toggleLoader();
-    makeSearch(search);
+    makeSearch(search)
+        .then(resp => {
+            if (resp.data.total === 0) {
+                iziToast.error({
+                    message: 'Sorry, there are no images matching<br>your search query. Please try again!',
+                })
+                return toggleLoader();
+            };
+            toggleLoader();
+            createMarkup(resp.data.hits);
+        })
+        .catch(error => {
+            iziToast.error({
+                title: "Oh no!",
+                message: `${error.message}`,
+            });
+            return toggleLoader();
+        });
     form.reset();
 };
